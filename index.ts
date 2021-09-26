@@ -1,5 +1,6 @@
-import { type, data, event, server } from '@grakkit/stdlib-paper';
-
+import { type, core, event, server } from '@grakkit/stdlib-paper';
+declare function require (name: string)
+const Data = require('@grakkit/stdlib-paper').data;
 import {
    obMaterial,
    obiInventory,
@@ -200,11 +201,11 @@ export function data (arg1: IsContainer, arg2 = 'default') {
    if (typeof arg2 !== 'string') {
       throw new TypeError('Argument 2 (if specified) must be of type "string"');
    } else if (thing instanceof Block) {
-      return data(`${store}/block/${thing.getWorld().getUID().toString()}/${thing.getBlockKey().toString(16)}`);
+      return Data(`${store}/block/${thing.getWorld().getUID().toString()}/${thing.getBlockKey().toString(16)}`);
    } else if (thing instanceof OfflinePlayer) {
-      return data(`${store}/player/${thing.getUniqueId().toString()}`);
+      return Data(`${store}/player/${thing.getUniqueId().toString()}`);
    } else if (thing instanceof Entity) {
-      return data(`${store}/entity/${thing.getUniqueId().toString()}`);
+      return Data(`${store}/entity/${thing.getUniqueId().toString()}`);
    } else if (thing instanceof ItemStack) {
       const meta = thing.getItemMeta();
       if (meta instanceof PersistentDataHolder) {
@@ -215,7 +216,7 @@ export function data (arg1: IsContainer, arg2 = 'default') {
          container.has(key, type) || (container.set(key, type, UUID.randomUUID().toString()), thing.setItemMeta(meta));
          // retroactively add key to serialized item stack input
          arg1 && 'class' in arg1 && arg1.class === 'ItemStack' && Object.assign(arg1, serialize(thing));
-         return data(`${store}/itemStack/${container.get(key, type)}`);
+         return Data(`${store}/itemStack/${container.get(key, type)}`);
       }
    }
 }

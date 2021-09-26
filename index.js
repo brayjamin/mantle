@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Interface = exports.vector = exports.serialize = exports.select = exports.player = exports.parse = exports.meta = exports.location = exports.itemStack = exports.item = exports.drop = exports.dist = exports.data = exports.boundingBox = void 0;
 const stdlib_paper_1 = require("@grakkit/stdlib-paper");
+const Data = require('@grakkit/stdlib-paper').data;
 const ArrayList = (0, stdlib_paper_1.type)('java.util.ArrayList');
 const Block = (0, stdlib_paper_1.type)('org.bukkit.block.Block');
 const BlockStateMeta = (0, stdlib_paper_1.type)('org.bukkit.inventory.meta.BlockStateMeta');
@@ -80,13 +81,13 @@ function data(arg1, arg2 = 'default') {
         throw new TypeError('Argument 2 (if specified) must be of type "string"');
     }
     else if (thing instanceof Block) {
-        return stdlib_paper_1.core.data(`${store}/block/${thing.getWorld().getUID().toString()}/${thing.getBlockKey().toString(16)}`);
+        return Data(`${store}/block/${thing.getWorld().getUID().toString()}/${thing.getBlockKey().toString(16)}`);
     }
     else if (thing instanceof OfflinePlayer) {
-        return stdlib_paper_1.core.data(`${store}/player/${thing.getUniqueId().toString()}`);
+        return Data(`${store}/player/${thing.getUniqueId().toString()}`);
     }
     else if (thing instanceof Entity) {
-        return stdlib_paper_1.core.data(`${store}/entity/${thing.getUniqueId().toString()}`);
+        return Data(`${store}/entity/${thing.getUniqueId().toString()}`);
     }
     else if (thing instanceof ItemStack) {
         const meta = thing.getItemMeta();
@@ -98,7 +99,7 @@ function data(arg1, arg2 = 'default') {
             container.has(key, type) || (container.set(key, type, UUID.randomUUID().toString()), thing.setItemMeta(meta));
             // retroactively add key to serialized item stack input
             arg1 && 'class' in arg1 && arg1.class === 'ItemStack' && Object.assign(arg1, (0, exports.serialize)(thing));
-            return stdlib_paper_1.core.data(`${store}/itemStack/${container.get(key, type)}`);
+            return Data(`${store}/itemStack/${container.get(key, type)}`);
         }
     }
 }
