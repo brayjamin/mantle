@@ -1,6 +1,6 @@
 {
   "name": "@brayjamin/mantle",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Useful utilities for modern-JS Minecraft development via the Grakkit pipeline, forked from @harrix432/mantle.",
   "main": "index.js",
   "dependencies": {
