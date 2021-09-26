@@ -1,9 +1,0 @@
-{
-   "compilerOptions": {
-      "experimentalDecorators": true,
-      "lib": [ "ESNext" ],
-      "module": "CommonJS",
-      "skipLibCheck": true,
-      "target": "ES2020"
-   }
-}
